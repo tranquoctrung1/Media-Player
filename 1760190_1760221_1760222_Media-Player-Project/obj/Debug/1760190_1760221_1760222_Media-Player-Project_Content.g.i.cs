@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("index.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("mediaplayer.ico")]
 
 

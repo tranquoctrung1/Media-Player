@@ -3,36 +3,61 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Icon="./ico/mediaplayer.ico"
         xmlns:local="clr-namespace:_1760190_1760221_1760222_Media_Player_Project"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="Media Player" Height="461" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Canvas>
-        <ListBox Width="214" Height="369" Canvas.Top="10" Name="PlayList" Canvas.Left="10"></ListBox>
-        <Button Name="addPlayList" Height="25" Width="85" Click="AddPlayList_Click" Canvas.Top="384" Canvas.Left="10">Add...</Button>
-        <Button Width="85" Height="25" Name="Remove" Click="Remove_Click" Canvas.Left="118" Canvas.Top="384">Remove</Button>
-        <Button Name="playPlaylist" Width="82" Height="25" Click="PlayPlaylist_Click" Canvas.Left="228" Canvas.Top="384">Play Play List</Button>
-        <Button Name="saveButton" Click="SaveButton_Click" Width="82" Height="25" Canvas.Left="334" Canvas.Top="384">Save</Button>
-        <Button Name="exportButton" Click="ExportButton_Click" Width="82" Height="25" Canvas.Left="425" Canvas.Top="384">Export</Button>
-        <StackPanel Orientation="Horizontal" Width="202" Canvas.Left="538" Canvas.Top="383">
-            <Label Canvas.Left="512" Canvas.Top="383">Random Song</Label>
-            <RadioButton Name="randomRadioButton" IsChecked="true" Canvas.Left="617" Canvas.Top="395"></RadioButton>
-            <Label Canvas.Left="637" Canvas.Top="383">Series Song</Label>
-            <RadioButton Name="seriesRadioButton" Canvas.Left="714" Canvas.Top="395"></RadioButton>
+        <ListBox Width="316" Height="364" Canvas.Top="45" Name="PlayList" Canvas.Left="10"></ListBox>
+        <Button Name="addPlayList" Click="AddPlayList_Click" Canvas.Top="10" Canvas.Left="10" BorderThickness="0" Background="Transparent" Width="30" Height="30">
+            <Image Source="./image/plus.png"></Image>
+        </Button>
+        <Button Width="30" Height="30" Name="Remove" Click="Remove_Click" Canvas.Left="85" Canvas.Top="10" BorderThickness="0" Background="Transparent">
+            <Image Source="./image/delete.png"></Image>
+        </Button>
+        <Button Name="playPlaylist" BorderThickness="0" Background="Transparent" Width="30" Height="30" Click="PlayPlaylist_Click" Canvas.Left="161" Canvas.Top="10">
+            <Image Source="./image/play.png"></Image>
+        </Button>
+        <Button Name="saveButton" BorderThickness="0" Background="Transparent" Click="SaveButton_Click" Width="30" Height="30" Canvas.Left="229" Canvas.Top="10">
+            <Image Source="./image/save.png"></Image>
+        </Button>
+        <Button Name="exportButton" BorderThickness="0" Background="Transparent" Click="ExportButton_Click" Width="30" Height="30" Canvas.Left="296" Canvas.Top="10">
+            <Image Source="./image/export.png" Height="30"></Image>
+        </Button>
+        <StackPanel Orientation="Horizontal" Width="202" Canvas.Left="538" Canvas.Top="391" Height="28">
+            <Label Canvas.Left="512" Canvas.Top="383" Height="26">Random Song:</Label>
+            <RadioButton x:Name="randomRadioButton" IsChecked="true" Height="14"/>
+            <Label Content="Series Song:"/>
+            <RadioButton Name="seriesRadioButton" Canvas.Left="714" Canvas.Top="395" Height="14"></RadioButton>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Width="169" Height="24" Canvas.Left="389" Canvas.Top="295">
-            <Label Canvas.Left="266" Canvas.Top="293">one Time</Label>
-            <RadioButton Name="onetimeRadioButton"  Canvas.Left="334" Canvas.Top="293" IsChecked="True"></RadioButton>
-            <Label Canvas.Left="389" Canvas.Top="293">Infinity Loop</Label>
-            <RadioButton Name="infinityRadioButton" Canvas.Left="470" Canvas.Top="305"></RadioButton>
+        <StackPanel Orientation="Horizontal" Width="181" Height="28" Canvas.Left="357" Canvas.Top="391">
+            <Label Canvas.Left="266" Canvas.Top="293">One Time:</Label>
+            <RadioButton x:Name="onetimeRadioButton" IsChecked="True" Height="14" VerticalAlignment="Center"/>
+            <Label Canvas.Left="389" Canvas.Top="293">Infinity Loop:</Label>
+            <RadioButton Name="infinityRadioButton" Canvas.Left="470" Canvas.Top="305" VerticalAlignment="Center"></RadioButton>
         </StackPanel>
-        <Label Name="TimeStatus" Content="Not playing..." HorizontalContentAlignment="Center" Canvas.Left="425" Canvas.Top="198" Panel.ZIndex="2" Foreground="White" Width="100"/>
-        <StatusBarItem Width="70" Height="26" Canvas.Left="389" Canvas.Top="229" HorizontalContentAlignment="Stretch" Panel.ZIndex="2">
-            <Slider Name="TimeLine" Thumb.DragStarted="TimeLine_DragStarted" Thumb.DragCompleted="TimeLine_DragCompleted" ValueChanged="TimeLine_ValueChanged" Margin="-114,0,-230,0" Height="26"></Slider>
+        <Label Name="TimeStatus" Content="Not playing..." HorizontalContentAlignment="Center" Canvas.Left="508" Canvas.Top="211" Panel.ZIndex="2" Foreground="White" Width="100"/>
+        <StatusBarItem Width="70" Height="26" Canvas.Left="388" Canvas.Top="260" HorizontalContentAlignment="Stretch" Panel.ZIndex="2">
+            <Slider Name="TimeLine" Thumb.DragStarted="TimeLine_DragStarted" Thumb.DragCompleted="TimeLine_DragCompleted" ValueChanged="TimeLine_ValueChanged" Margin="-18,0,-303,0" Height="26"></Slider>
         </StatusBarItem>
-        <Button Name="browserButton" Width="82" Height="25" Canvas.Left="266" Canvas.Top="324" Click="BrowserButton_Click">Browser...</Button>
-        <Button Name="playButton" Width="82" Height="25" Click="PlayButton_Click" Canvas.Left="377" Canvas.Top="324">Play</Button>
-        <Button Name="pauseButton" Width="82" Height="25" Click="PauseButton_Click" Canvas.Left="495" Canvas.Top="324">Pause</Button>
-        <Button Name="stopButton" Width="82" Height="25" Click="StopButton_Click" Canvas.Left="617" Canvas.Top="324">Stop</Button>
-        <Image Source="./image/img.png" Width="433" Canvas.Left="266" Canvas.Top="10" Height="245"></Image>
+        <Button Name="browserButton" Width="30" Height="30" Canvas.Left="346" Canvas.Top="324" Click="BrowserButton_Click" Background="Transparent" BorderThickness="0" >
+            <Image  Source="./image/search.png"></Image>
+        </Button>
+        <Button Name="playButton" Width="30" Height="30" Background="Transparent" BorderThickness="0" Click="PlayButton_Click" Canvas.Left="482" Canvas.Top="324">
+            <Image Source="./image/play2.png"></Image>
+        </Button>
+        <Button Name="pauseButton" Width="30" Height="30" Background="Transparent" BorderThickness="0" Click="PauseButton_Click" Canvas.Left="655" Canvas.Top="324">
+            <Image Source="./image/pause.png"></Image>
+        </Button>
+        <Button Name="stopButton" Width="30" Height="30" Click="StopButton_Click" Canvas.Left="752" Canvas.Top="324" BorderThickness="0" Background="Transparent">
+            <Image Source="./image/stop.png"></Image>
+        </Button>
+        <Button Name="nextButton" Width="30" Height="30" BorderThickness="0" Background="Transparent" Click="NextButton_Click" Canvas.Left="561" Canvas.Top="324">
+            <Image Source="./image/skip.png"></Image>
+        </Button>
+        <Button Name="previousButton" Width="30" Height="30" Background="Transparent" BorderThickness="0" Canvas.Left="402" Canvas.Top="324" Click="PreviousButton_Click">
+            <Image Source="./image/previous.png"></Image>
+        </Button>
+        <Image Source="./image/img.png" Width="436" Canvas.Left="346" Canvas.Top="45" Height="245"></Image>
     </Canvas>
 </Window>

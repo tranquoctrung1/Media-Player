@@ -58,40 +58,12 @@ namespace _1760190_1760221_1760222_Media_Player_Project
             // Next song
             if (e.Control && e.Shift && (e.KeyCode == Keys.N))
             {
-                if(_indexPlayList < _playList.Count -1 )
-                {
-                    _indexPlayList = _indexPlayList + 1;
-                    _player.Open(new Uri(_playList[_indexPlayList]));
-                    _player.Play();
-
-                    _timer.Interval = TimeSpan.FromSeconds(1);
-                    _timer.Tick += timer_Tick;
-                    _timer.Start();
-                    _player.MediaEnded += _player_MediaEnded;
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("Can not next!");
-                }
+                NextSong();
             }
             //Previous song
             if (e.Control && e.Shift && (e.KeyCode == Keys.P))
             {
-                if(_indexPlayList > 0)
-                {
-                    _indexPlayList = _indexPlayList - 1;
-                    _player.Open(new Uri(_playList[_indexPlayList]));
-                    _player.Play();
-
-                    _timer.Interval = TimeSpan.FromSeconds(1);
-                    _timer.Tick += timer_Tick;
-                    _timer.Start();
-                    _player.MediaEnded += _player_MediaEnded;
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("Can not previous!");
-                }
+                PreviousSong();   
             }
             //Pause song
             if (e.Control && e.Shift && (e.KeyCode == Keys.A))
@@ -329,6 +301,54 @@ namespace _1760190_1760221_1760222_Media_Player_Project
         private void Window_Closed(object sender, EventArgs e)
         {
             Unsubscribe();
+        }
+
+        private void NextSong()
+        {
+            if (_indexPlayList < _playList.Count - 1)
+            {
+                _indexPlayList = _indexPlayList + 1;
+                _player.Open(new Uri(_playList[_indexPlayList]));
+                _player.Play();
+
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Tick += timer_Tick;
+                _timer.Start();
+                _player.MediaEnded += _player_MediaEnded;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Can not next!");
+            }
+        }
+
+        private void PreviousSong()
+        {
+            if (_indexPlayList > 0)
+            {
+                _indexPlayList = _indexPlayList - 1;
+                _player.Open(new Uri(_playList[_indexPlayList]));
+                _player.Play();
+
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Tick += timer_Tick;
+                _timer.Start();
+                _player.MediaEnded += _player_MediaEnded;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Can not previous!");
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            NextSong();
+        }
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousSong();
         }
     }
 }

@@ -1,0 +1,16 @@
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\bin\Release\1760190_1760221_1760222_Media-Player-Project.exe.config
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\bin\Release\1760190_1760221_1760222_Media-Player-Project.exe
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\bin\Release\1760190_1760221_1760222_Media-Player-Project.pdb
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\bin\Release\Gma.System.MouseKeyHook.dll
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\MainWindow.g.cs
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\App.g.cs
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project_MarkupCompile.cache
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project_MarkupCompile.lref
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\MainWindow.baml
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.g.resources
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\_1760190_1760221_1760222_Media_Player_Project.Properties.Resources.resources
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.csproj.GenerateResource.cache
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.csproj.CoreCompileInputs.cache
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.csproj.CopyComplete
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.exe
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Release\1760190_1760221_1760222_Media-Player-Project.pdb

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mediaplayer.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gma.System.MouseKeyHook, Version=5.6.130.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
@@ -104,6 +107,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="index.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete.png" />
+    <Resource Include="Image\export.png" />
+    <Resource Include="Image\music-player.png" />
+    <Resource Include="Image\play.png" />
+    <Resource Include="Image\plus.png" />
+    <Resource Include="Image\save.png" />
+    <Resource Include="Image\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\pause.png" />
+    <Resource Include="Image\play2.png" />
+    <Resource Include="Image\previous.png" />
+    <Resource Include="Image\skip.png" />
+    <Resource Include="Image\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\mediaplayer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="mediaplayer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
