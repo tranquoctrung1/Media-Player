@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 
 namespace _1760190_1760221_1760222_Media_Player_Project
 {
@@ -27,12 +29,12 @@ namespace _1760190_1760221_1760222_Media_Player_Project
             InitializeComponent();
         }
 
+        List<string> _playList = new List<string>();
         private bool userIsDraggingSlider = false;
+        int _indexPlayList = 0;
 
         MediaPlayer _player = new MediaPlayer();
         DispatcherTimer _timer = new DispatcherTimer();
-
-        string a = null;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -46,7 +48,6 @@ namespace _1760190_1760221_1760222_Media_Player_Project
             {
                 var filename = screen.FileName;
                 _player.Open(new Uri(filename));
-                a = GetName(filename);
             }
 
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -71,6 +72,7 @@ namespace _1760190_1760221_1760222_Media_Player_Project
         {
             _player.Play();
             _timer.Start();
+            _player.MediaEnded += _player_MediaEnded;
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
@@ -102,6 +104,7 @@ namespace _1760190_1760221_1760222_Media_Player_Project
                 foreach(var filename in filenames)
                 {
                     PlayList.Items.Add(GetName(filename));
+                    _playList.Add(filename);
                 }
             }
 
@@ -130,8 +133,123 @@ namespace _1760190_1760221_1760222_Media_Player_Project
 
             for (int i = PlayList.SelectedItems.Count - 1; i >= 0; i--)
             {
+                _playList.RemoveAt(int.Parse(PlayList.SelectedIndex.ToString()));
                 PlayList.Items.Remove(PlayList.SelectedItem);
             }
+        }
+
+        private void PlayPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            if (PlayList.SelectedIndex == -1)
+            {
+
+                _player.Open(new Uri(_playList[_indexPlayList]));
+                _player.Play();
+            }
+            else
+            {
+
+                _indexPlayList = int.Parse(PlayList.SelectedIndex.ToString());
+                _player.Open(new Uri(_playList[_indexPlayList]));
+                _player.Play();
+            }
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += timer_Tick;
+            _timer.Start();
+            _player.MediaEnded += _player_MediaEnded;
+        }
+
+        private void _player_MediaEnded(object sender, EventArgs e)
+        {
+            if(randomRadioButton.IsChecked == true)
+            {
+                Random random = new Random();
+                _indexPlayList = random.Next(1, _playList.Count) - 1;
+
+                _player.Open(new Uri(_playList[_indexPlayList]));
+                _player.Play();
+            }
+            else
+            {
+                _indexPlayList++;
+                if(_indexPlayList == _playList.Count)
+                {
+                    if (infinityRadioButton.IsChecked == true)
+                    {
+                        _indexPlayList = 0;
+
+                        _player.Open(new Uri(_playList[_indexPlayList]));
+                        _player.Play();
+                    }
+                    else
+                    {
+                        _player.Stop();
+                    }
+                }
+                else
+                {
+                    _player.Open(new Uri(_playList[_indexPlayList]));
+                    _player.Play();
+                }
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var screen = new OpenFileDialog();
+            if (screen.ShowDialog() == true)
+            {
+                var filename = screen.FileName;
+                var doc = new XmlDocument();
+                doc.Load(filename);
+
+                foreach(string song in _playList)
+                {
+                    var newNode = doc.CreateNode("element", "entry", "");
+                    ((XmlElement)newNode)
+                        .SetAttribute("source", song);
+
+                    doc.DocumentElement.AppendChild(newNode);
+                }
+
+                doc.Save(filename);
+
+                using (StreamWriter sw = new StreamWriter("names.txt"))
+                {
+
+                    foreach (string s in names)
+                    {
+                        sw.WriteLine(s);
+                    }
+                }
+
+                MessageBox.Show("Saved..");
+
+            }
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            _playList.Clear();
+            PlayList.Items.Clear();
+
+            var screen = new OpenFileDialog();
+            if (screen.ShowDialog() == true)
+            {
+                var filename = screen.FileName;
+                var doc = new XmlDocument();
+                doc.Load(filename);
+
+                var childs = doc.DocumentElement.ChildNodes;
+
+                foreach(XmlNode child in childs)
+                {
+                    _playList.Add(child.Attributes["source"].Value);
+                    PlayList.Items.Add(GetName(child.Attributes["source"].Value));
+                }
+            }
+
+            MessageBox.Show("Exported...");
         }
     }
 }
