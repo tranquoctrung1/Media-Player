@@ -13,3 +13,5 @@ C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190
 C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Debug\1760190_1760221_1760222_Media-Player-Project.csproj.CoreCompileInputs.cache
 C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Debug\1760190_1760221_1760222_Media-Player-Project.exe
 C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Debug\1760190_1760221_1760222_Media-Player-Project.pdb
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\bin\Debug\Gma.System.MouseKeyHook.dll
+C:\Users\React\source\repos\1760190_1760221_1760222_Media-Player-Project\1760190_1760221_1760222_Media-Player-Project\obj\Debug\1760190_1760221_1760222_Media-Player-Project.csproj.CopyComplete

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1760190_1760221_1760222_Media_Player_Project"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Media Player" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Canvas>
         <ListBox Width="214" Height="369" Canvas.Top="10" Name="PlayList" Canvas.Left="10"></ListBox>
         <Button Name="addPlayList" Height="25" Width="85" Click="AddPlayList_Click" Canvas.Top="384" Canvas.Left="10">Add...</Button>

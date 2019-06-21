@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Gma.System.MouseKeyHook;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -29,6 +31,8 @@ namespace _1760190_1760221_1760222_Media_Player_Project
             InitializeComponent();
         }
 
+        private IKeyboardMouseEvents _hook;
+
         List<string> _playList = new List<string>();
         private bool userIsDraggingSlider = false;
         int _indexPlayList = 0;
@@ -36,14 +40,81 @@ namespace _1760190_1760221_1760222_Media_Player_Project
         MediaPlayer _player = new MediaPlayer();
         DispatcherTimer _timer = new DispatcherTimer();
 
+        public void Subscribe()
+        {
+            _hook = Hook.GlobalEvents();
+
+            _hook.KeyUp += _hook_KeyUp;
+        }
+
+        public void Unsubscribe()
+        {
+            _hook.KeyUp -= _hook_KeyUp;
+            _hook.Dispose();
+        }
+
+        private void _hook_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            // Next song
+            if (e.Control && e.Shift && (e.KeyCode == Keys.N))
+            {
+                if(_indexPlayList < _playList.Count -1 )
+                {
+                    _indexPlayList = _indexPlayList + 1;
+                    _player.Open(new Uri(_playList[_indexPlayList]));
+                    _player.Play();
+
+                    _timer.Interval = TimeSpan.FromSeconds(1);
+                    _timer.Tick += timer_Tick;
+                    _timer.Start();
+                    _player.MediaEnded += _player_MediaEnded;
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Can not next!");
+                }
+            }
+            //Previous song
+            if (e.Control && e.Shift && (e.KeyCode == Keys.P))
+            {
+                if(_indexPlayList > 0)
+                {
+                    _indexPlayList = _indexPlayList - 1;
+                    _player.Open(new Uri(_playList[_indexPlayList]));
+                    _player.Play();
+
+                    _timer.Interval = TimeSpan.FromSeconds(1);
+                    _timer.Tick += timer_Tick;
+                    _timer.Start();
+                    _player.MediaEnded += _player_MediaEnded;
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Can not previous!");
+                }
+            }
+            //Pause song
+            if (e.Control && e.Shift && (e.KeyCode == Keys.A))
+            {
+                _player.Pause();
+            }
+            // Play song
+            if (e.Control && e.Shift && (e.KeyCode == Keys.C))
+            {
+                _player.Play();
+                _timer.Start();
+                _player.MediaEnded += _player_MediaEnded;
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            Subscribe();
         }
 
         private void BrowserButton_Click(object sender, RoutedEventArgs e)
         {
-            var screen = new OpenFileDialog();
+            var screen = new Microsoft.Win32.OpenFileDialog();
             if(screen.ShowDialog() == true)
             {
                 var filename = screen.FileName;
@@ -94,7 +165,7 @@ namespace _1760190_1760221_1760222_Media_Player_Project
 
         private void AddPlayList_Click(object sender, RoutedEventArgs e)
         {
-            var screen = new OpenFileDialog();
+            var screen = new Microsoft.Win32.OpenFileDialog();
             screen.Multiselect = true;
 
             if (screen.ShowDialog() == true)
@@ -108,7 +179,7 @@ namespace _1760190_1760221_1760222_Media_Player_Project
                 }
             }
 
-            PlayList.SelectionMode = SelectionMode.Multiple;
+            PlayList.SelectionMode = System.Windows.Controls.SelectionMode.Multiple;
         }
 
         private void TimeLine_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
@@ -196,14 +267,16 @@ namespace _1760190_1760221_1760222_Media_Player_Project
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var screen = new OpenFileDialog();
+            var screen = new Microsoft.Win32.OpenFileDialog();
             if (screen.ShowDialog() == true)
             {
                 var filename = screen.FileName;
                 var doc = new XmlDocument();
                 doc.Load(filename);
 
-                foreach(string song in _playList)
+                doc.DocumentElement.RemoveAll();
+
+                foreach (string song in _playList)
                 {
                     var newNode = doc.CreateNode("element", "entry", "");
                     ((XmlElement)newNode)
@@ -214,16 +287,12 @@ namespace _1760190_1760221_1760222_Media_Player_Project
 
                 doc.Save(filename);
 
-                using (StreamWriter sw = new StreamWriter("names.txt"))
+                using (StreamWriter sw = new StreamWriter("index.txt"))
                 {
-
-                    foreach (string s in names)
-                    {
-                        sw.WriteLine(s);
-                    }
+                    sw.WriteLine(_indexPlayList);
                 }
 
-                MessageBox.Show("Saved..");
+                System.Windows.MessageBox.Show("Saved..");
 
             }
         }
@@ -233,7 +302,7 @@ namespace _1760190_1760221_1760222_Media_Player_Project
             _playList.Clear();
             PlayList.Items.Clear();
 
-            var screen = new OpenFileDialog();
+            var screen = new Microsoft.Win32.OpenFileDialog();
             if (screen.ShowDialog() == true)
             {
                 var filename = screen.FileName;
@@ -249,7 +318,17 @@ namespace _1760190_1760221_1760222_Media_Player_Project
                 }
             }
 
-            MessageBox.Show("Exported...");
+            using (StreamReader sr = new StreamReader("index.txt"))
+            {
+                _indexPlayList = int.Parse( sr.ReadLine());
+            }
+
+            System.Windows.MessageBox.Show("Exported...");
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Unsubscribe();
         }
     }
 }
